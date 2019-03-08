@@ -1,0 +1,16 @@
+<!-- index.wxml -->
+<import src="/pages/list-template/list-template.wxml"/>
+<view class='container'>
+    <swiper indicator-dots='true' indicator-color='yellowgreen' indicator-active-color='pink'>
+        <swiper-item>
+            <image src='#'></image>
+            <image src='#'></image>
+            <image src='#'></image>
+            <image src='#'></image>
+            <image src='#'></image>
+        </swiper-item>
+    </swiper>
+    <view class="" hover-class="none" hover-stop-propagation="false">
+        <template is="listTmp"></template>
+    </view>
+</view>

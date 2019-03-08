@@ -1,0 +1,66 @@
+/* pages/profile/profile.wxss */
+
+/* 整个userinfo的布局 */
+.userinfo {
+    display: block;
+    width: 100%;
+    height: 20%;
+    margin-top: 5%;
+}
+
+/* 按钮 */
+button {
+    border: 1rpx solid #999;
+    font-size: 32rpx;
+}
+
+/* 用户名以及头像的view */
+.user {
+    width: 100%;
+    height: 24%;
+    background-color: #bfa;
+}
+
+/* 用户头像 */
+.userinfo-avatar {
+    width: 128rpx;
+    height: 128rpx;
+    margin: 10rpx;
+    border-radius: 50%;
+    border: 1rpx solid #999;
+}
+
+/* 用户昵称 */
+.userinfo-nickname {
+    color: #aaa;
+}
+
+/* 设置项view */
+.settings {
+    border-top: #60abb0 1rpx solid;
+    border-bottom: #60abb0 1rpx solid;
+    margin-top: 24rpx;
+    padding-bottom: 24rpx;
+}
+
+/* 单独一个设置项 */
+.singleSetting {
+    display: block;
+    width: 90%;
+    margin: 5rpx auto;
+    border-bottom: #60abb0 1rpx solid;
+}
+
+/*  */
+.userBg {
+    display: flex;
+    height: 200rpx;
+    width: 100%;
+    color: #60abb0;
+}
+
+/* 下方提示 */
+.usermotto {
+    margin-top: 200px;
+}
+
