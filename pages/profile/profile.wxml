@@ -1,17 +1,20 @@
 <!-- pages/profile/profile.wxml -->
 <view class="container">
     <view class="userinfo">
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class=".loginBtn">
             Login
         </button>
         <block wx:else>
-            <view class="user" hover-class="none" hover-stop-propagation="false">
+            <view class="user clearfix" hover-class="none" hover-stop-propagation="false">
                 <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
                 <text class="userinfo-nickname">{{userInfo.nickName}}</text>
             </view>
             <view class="settings" hover-class="none" hover-stop-propagation="false">
                 <text bindtap="goToMyOrders" class="singleSetting" selectable="false" space="false" decode="false">
                     My Orders
+                </text>
+                <text bindtap="goToRecommend" class="singleSetting" selectable="false" space="false" decode="false">
+                    Recommendation Message
                 </text>
                 <text bindtap="goToSettings" class="singleSetting" selectable="false" space="false" decode="false">
                     Settings

@@ -41,9 +41,14 @@ Page({
      * 前往设置页面
      */
     goToSettings: function () {
-        wx.switchTab({
-            url: '/pages/index/index',
-        })
+        wx.navigateTo({
+            url: '/pages/settings/settings',
+            success: (result) => {
+                // TODO
+            },
+            fail: () => {},
+            complete: () => {}
+        });
     },
 
 

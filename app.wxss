@@ -1,10 +1,13 @@
 /**app.wxss**/
+/* 整个App的容器 */
 .container {
     height: 100%;
+    /* 弹性布局 */
     display: flex;
+    /* 从上到下的每行排列 */
     flex-direction: column;
+    /* item居中 */
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
 }
-

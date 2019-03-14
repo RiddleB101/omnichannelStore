@@ -1,5 +1,6 @@
 /**index.wxss**/
-@import '/pages/list-template/list-template.wxss';
+
+
 swiper {
     width: 100%;
     height: 400rpx;
@@ -8,4 +9,59 @@ swiper {
 swiper image {
     width: 100%;
     height: 100%;
+}
+
+.goodsList {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.good {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #ddd;
+}
+
+.goodImg {
+    padding: 5px;
+    width: 80px;
+    height: 80px;
+}
+
+.goodInfo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.goodNav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.goodName {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    color: #555;
+    justify-content: center;
+}
+
+.goodPrice {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #e4393c;
+    font-weight: 600;
+}
+
+.cart {
+    width: 40px;
+    height: 40px;
+    padding-right: 10px;
 }

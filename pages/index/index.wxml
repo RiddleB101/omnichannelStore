@@ -1,16 +1,41 @@
 <!-- index.wxml -->
-<import src="/pages/list-template/list-template.wxml"/>
+<import src="/pages/list-template/list-template.wxml" />
 <view class='container'>
-    <swiper indicator-dots='true' indicator-color='yellowgreen' indicator-active-color='pink'>
-        <swiper-item>
-            <image src='#'></image>
-            <image src='#'></image>
-            <image src='#'></image>
-            <image src='#'></image>
-            <image src='#'></image>
-        </swiper-item>
+
+    <!-- 轮播图 -->
+    <swiper indicator-dots='true' indicator-color='yellowgreen' indicator-active-color='pink' autoplay="{{true}}">
+        <block wx:for="{{imgUrls}}">
+            <swiper-item>
+                <image src='{{item}}' class="slide-image" width="355rpx" height="150rpx"></image>
+            </swiper-item>
+        </block>
     </swiper>
-    <view class="" hover-class="none" hover-stop-propagation="false">
-        <template is="listTmp"></template>
+
+    <!-- 列表 -->
+    <view class="goodsList" hover-class="none" hover-stop-propagation="false">
+        <!-- 商品列表 -->
+        <block wx:for="{{goodsList}}">
+            <!-- 单个商品 -->
+            <view class="good">
+                <!-- 商品图片 -->
+                <view>
+                    <image src="{{item.imgUrl}}" class="goodImg"></image>
+                </view>
+                <!-- 右侧说明部分 -->
+                <view class="goodInfo">
+                    <!-- 说明的上半部分 -->
+                    <view class="goodNav">
+                        <text class="goodName" selectable="false" space="false" decode="false">
+                            {{item.name}}
+                        </text>
+                    </view>
+                    <!-- 说明的下半部分 -->
+                    <view class="goodPrice" hover-class="none" hover-stop-propagation="false">
+                        <text>${{item.price}}</text>
+                        <image id="{{item.id}}" class="cart" src="../../img/addition.png" bindtap></image>
+                    </view>
+                </view>
+            </view>
+        </block>
     </view>
 </view>
