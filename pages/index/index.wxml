@@ -1,16 +1,13 @@
 <!-- index.wxml -->
-<import src="/pages/list-template/list-template.wxml" />
 <view class='container'>
-
     <!-- 轮播图 -->
     <swiper indicator-dots='true' indicator-color='yellowgreen' indicator-active-color='pink' autoplay="{{true}}">
-        <block wx:for="{{imgUrls}}">
+        <block wx:for="{{navImgUrls}}">
             <swiper-item>
                 <image src='{{item}}' class="slide-image" width="355rpx" height="150rpx"></image>
             </swiper-item>
         </block>
     </swiper>
-
     <!-- 列表 -->
     <view class="goodsList" hover-class="none" hover-stop-propagation="false">
         <!-- 商品列表 -->
@@ -32,7 +29,7 @@
                     <!-- 说明的下半部分 -->
                     <view class="goodPrice" hover-class="none" hover-stop-propagation="false">
                         <text>${{item.price}}</text>
-                        <image id="{{item.id}}" class="cart" src="../../img/addition.png" bindtap></image>
+                        <image id="{{item.id}}" class="cart" src="../../img/addition.png" bindtap="addCart"></image>
                     </view>
                 </view>
             </view>

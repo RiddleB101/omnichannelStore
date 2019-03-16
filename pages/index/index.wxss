@@ -1,6 +1,5 @@
 /**index.wxss**/
-
-
+/* 轮播图 */
 swiper {
     width: 100%;
     height: 400rpx;
@@ -11,24 +10,28 @@ swiper image {
     height: 100%;
 }
 
+/* 商品列表样式 */
 .goodsList {
     background: #fff;
     display: flex;
     flex-direction: column;
 }
 
+/* 单个商品样式 */
 .good {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #ddd;
 }
 
+/* 商品图片样式 */
 .goodImg {
-    padding: 5px;
+    padding: 10px 5px 5px;
     width: 80px;
     height: 80px;
 }
 
+/* 右边上平信息 */
 .goodInfo {
     display: flex;
     flex: 1;
