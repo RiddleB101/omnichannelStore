@@ -65,33 +65,37 @@ Page({
 
     },
 
-    // addCart函数
+    /**
+     * addCart函数
+     * 先检查本地缓存中的数据是否含有目前点击商品
+     */
     addCart: function (e) {
         this.setData({
             toastHidden: false
         });
         for (var i in this.data.goodsList) {
+            this.data.goodsList[i].selected = true;
             if (this.data.goodsList[i].id == e.target.id) {
                 this.data.goodsList[i].count = 1;
-                var arr = wx.getStorageSync('cart') || [];
-                if (arr.length > 0) {
-                    for (var j in arr) {
-                        if (arr[j].id == e.target.id) {
-                            arr[j].count++;
+                var cart = wx.getStorageSync('cart') || [];
+                if (cart.length > 0) {
+                    for (var j in cart) {
+                        if (cart[j].id == e.target.id) {
+                            cart[j].count++;
                             try {
-                                wx.setStorageSync('cart', arr);
+                                wx.setStorageSync('cart', cart);
                             } catch (e) {
                                 console.log(e);
                             }
                             return;
                         }
                     }
-                    arr.push(this.data.goodsList[i]);
+                    cart.push(this.data.goodsList[i]);
                 } else {
-                    arr.push(this.data.goodsList[i]);
+                    cart.push(this.data.goodsList[i]);
                 }
                 try {
-                    wx.setStorageSync('cart', arr);
+                    wx.setStorageSync('cart', cart);
                     return;
                 } catch (e) {
                     console.log(e);
@@ -100,8 +104,29 @@ Page({
         }
     },
 
+    /**
+     * navToDetails函数
+     * 绑定跳转详情页的函数
+     */
+    navToDetails(e) {
+        var index = e.currentTarget.dataset.index;
+        var aimProduct = this.data.goodsList[index];
+        wx.navigateTo({
+            // 暂时的解决方案, 将数据存放到localStorage中, 后期根据接口的情况再做修改
+            url: '/pages/product_detail/product_detail?id=' + aimProduct.id + '&index=' + index + '&name=' + aimProduct.name + '&price=' + aimProduct.price,
+            success: (result) => {
+                
+            },
+            fail: () => {},
+            complete: () => {}
+        });
+    },
+
     onLoad: function () {
-
+        var imgArr = [];
+        for(let i in this.data.goodsList) {
+            imgArr.push(this.data.goodsList[i].imgUrl);
+        }
+        wx.setStorageSync('imgArr', imgArr);
     }
-
 })

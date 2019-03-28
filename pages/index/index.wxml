@@ -11,17 +11,17 @@
     <!-- 列表 -->
     <view class="goodsList" hover-class="none" hover-stop-propagation="false">
         <!-- 商品列表 -->
-        <block wx:for="{{goodsList}}">
+        <block wx:for="{{goodsList}}" wx:key="{{index}}">
             <!-- 单个商品 -->
             <view class="good">
                 <!-- 商品图片 -->
-                <view>
+                <view data-index="{{index}}" bindtap="navToDetails" >
                     <image src="{{item.imgUrl}}" class="goodImg"></image>
                 </view>
                 <!-- 右侧说明部分 -->
                 <view class="goodInfo">
                     <!-- 说明的上半部分 -->
-                    <view class="goodNav">
+                    <view class="goodNav" data-index="{{index}}" bindtap="navToDetails">
                         <text class="goodName" selectable="false" space="false" decode="false">
                             {{item.name}}
                         </text>

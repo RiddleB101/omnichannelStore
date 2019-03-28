@@ -1,5 +1,5 @@
 /* pages/cart/cart.wxss */
-@import '../util.wxss';
+@import '../../utils/util.wxss';
 
 .cart-box {
     padding-bottom: 100rpx;
@@ -44,10 +44,9 @@
 
 .cart-list .cart-count-box {
     position: absolute;
-    left: 285;
+    left: 285rpx;
     bottom: 20rpx;
     width: 250rpx;
-    height: 80rpx;
 }
 
 .cart-list .cart-count-box text {

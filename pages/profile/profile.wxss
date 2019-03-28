@@ -1,5 +1,5 @@
 /* pages/profile/profile.wxss */
-@import '../util.wxss';
+@import '../../utils/util.wxss';
 
 /* 整个userinfo的布局 */
 .userinfo {

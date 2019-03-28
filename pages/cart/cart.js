@@ -36,7 +36,6 @@ Page({
             for (var i in arr) {
                 this.data.total += Number(arr[i].price) * Number(arr[i].count);
                 this.data.goodsCount += Number(arr[i].count);
-                arr[i].selected = true;
             }
             this.setData({
                 isCart: true,
@@ -95,10 +94,19 @@ Page({
     selectList(e) {
         const index = parseInt(e.currentTarget.dataset.index);
         let cart = this.data.cart;
+        let selectAllStatus = this.data.selectAllStatus;
         const selected = cart[index].selected;
         cart[index].selected = !selected;
+        for (var i in cart) {
+            if (!cart[i].selected) {
+                selectAllStatus = false;
+                break;
+            }
+            selectAllStatus = true;
+        }
         this.setData({
-            cart: cart
+            cart: cart,
+            selectAllStatus: selectAllStatus
         });
         this.getTotalPrice();
     },

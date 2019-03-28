@@ -1,11 +1,15 @@
-<!--pages/product_detail/product_detail.wxml-->
-<view>
-    <image src='/img/detail/'></image>
-    <view>
-        <image src='#'></image>
-        <text></text>
-        <text></text>
-        <text></text>
+<!-- pages/product_detail/product_detail.wxml -->
+<view class="container">
+    <view class="productImg">
+        <image class="productDetails" src="{{imgUrl}}" binderror="" bindload=""></image>
     </view>
-    
+    <view class="productInfo" hover-class="none" hover-stop-propagation="false">
+        <view class="productText" hover-class="none" hover-stop-propagation="false">
+            <text class="introduction" selectable="false" space="false" decode="false"></text>
+        </view>
+    </view>
+    <view class="detailFooter" hover-class="none" hover-stop-propagation="false">
+        <view class="price" hover-class="none" hover-stop-propagation="false">￥{{price}}</view>
+        <button class="addToCart" bindtap="{{addToCart}}">Add to Cart</button>
+    </view>
 </view>
