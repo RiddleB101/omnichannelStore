@@ -4,7 +4,13 @@
         "pages/logs/logs",
         "pages/find/find",
         "pages/cart/cart",
-        "pages/profile/profile",
+        "pages/my/profile",
+        "pages/my/index",
+        "pages/my/addressList",
+        "pages/my/addressSet",
+        "pages/my/order_list",
+        "pages/my/order_info",
+        "pages/my/commentList",
         "pages/product_detail/product_detail",
         "pages/settings/settings"
     ],
@@ -19,8 +25,7 @@
         "selectedColor": "#35495e",
         "borderStyle": "white",
         "backgroundColor": "#f9f9f9",
-        "list": [
-            {
+        "list": [{
                 "pagePath": "pages/index/index",
                 "text": "Home",
                 "iconPath": "img/home.png",
@@ -39,7 +44,7 @@
                 "selectedIconPath": "img/cart_selected.png"
             },
             {
-                "pagePath": "pages/profile/profile",
+                "pagePath": "pages/my/index",
                 "text": "Me",
                 "iconPath": "img/profile.png",
                 "selectedIconPath": "img/profile_selected.png"

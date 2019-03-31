@@ -125,7 +125,7 @@ App({
      * @param {*} value 
      */
     setCache: function (key, value) {
-        wx.setStorages({
+        wx.setStorageSync({
             key: key,
             data: value
         });

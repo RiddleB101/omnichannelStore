@@ -1,9 +1,0 @@
-image {
-    width: 30%;
-    height: 30%;
-    margin-left: 10%;
-}
-
-.tmpContainer {
-    border-top: 1rpx black solid;
-}
