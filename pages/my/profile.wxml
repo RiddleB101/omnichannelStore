@@ -1,7 +1,7 @@
 <!-- pages/profile/profile.wxml -->
 <view class="container">
     <view class="userinfo">
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class=".loginBtn">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="loginBtn">
             Login
         </button>
         <block wx:else>

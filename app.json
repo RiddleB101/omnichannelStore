@@ -26,7 +26,8 @@
         "selectedColor": "#35495e",
         "borderStyle": "white",
         "backgroundColor": "#f9f9f9",
-        "list": [{
+        "list": [
+            {
                 "pagePath": "pages/index/index",
                 "text": "Home",
                 "iconPath": "img/home.png",

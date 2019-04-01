@@ -7,7 +7,6 @@ Page({
      * 页面的初始数据
      */
     data: {
-        // motto: 'Welcome to omnichannel Store!',
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo')
