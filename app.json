@@ -11,6 +11,7 @@
         "pages/my/order_list",
         "pages/my/order_info",
         "pages/my/commentList",
+        "pages/order/index",
         "pages/product_detail/product_detail",
         "pages/settings/settings"
     ],

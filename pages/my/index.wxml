@@ -15,8 +15,16 @@
     <navigator url="/pages/my/commentList" hover-class="navigator-hover">我的评价</navigator>
   </view>
 
+  <view class="my-item">
+    <navigator url="/pages/index/index" hover-class="navigator-hover">Recommendation</navigator>
+  </view>
+
+  <view class="my-item">
+    <navigator url="/pages/settings/settings" hover-class="navigator-hover">Settings</navigator>
+  </view>
+
   <view style="height:20rpx;background: #eee;width:100%;"></view>
-  <view class="version">Powered by 编程浪子</view>
+  <view class="version">Powered by HKU</view>
   <view style="height:20rpx;background: #eee;width:100%;"></view>
 
 </view>

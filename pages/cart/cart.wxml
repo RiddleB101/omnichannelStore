@@ -35,7 +35,7 @@
             </view>
             <text>全选</text>
             <text class="cart-total-price">￥{{total}}</text>
-            <button class="total_pay" size="mini">Go to pay</button>
+            <button class="total_pay" size="mini" bindtap="goToPay">Go to pay</button>
         </view>
     </view>
     <view wx:else>

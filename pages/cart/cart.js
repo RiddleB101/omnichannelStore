@@ -209,5 +209,19 @@ Page({
         } catch (e) {
             console.log(e);
         }
+    },
+
+    /**
+     * 
+     */ 
+    goToPay(){
+        wx.navigateTo({
+            url: '../order/index',
+            success: (result)=>{
+                
+            },
+            fail: ()=>{},
+            complete: ()=>{}
+        });
     }
 })
