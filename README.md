@@ -6,28 +6,28 @@ WeChat miniApp for omnichannel Store
 ```js
 | - img
 | - pages
-	| - cart
-	| - find
-	| - index
-	| - logs
-	| - product_details
-	| - my
-		| - addressList
-		| - addressSet
-		| - comment
-		| - commentList
-		| - index
-		| - order_info
-		| - order_list
-		| - profile
-	| - settings
-	| - order
+  | - cart
+  | - find
+  | - index
+  | - logs
+  | - product_details
+  | - my
+    | - addressList
+    | - addressSet
+    | - comment
+    | - commentList
+    | - index
+    | - order_info
+    | - order_list
+    | - profile
+  | - settings
+  | - order
 | - utils
-	| - util.js
-	| - util.wxss
-	| - api.js
-	| - apiConfig.js
-	| - city.js
+  | - util.js
+  | - util.wxss
+  | - api.js
+  | - apiConfig.js
+  | - city.js
 | - wxParse
 | - app.js
 | - app.json
