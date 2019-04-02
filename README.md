@@ -46,7 +46,7 @@ The server based on Python Flask frame can handle the data. In the future, the c
 
 `/img` - involve the icons, it should notice that the pictures of the products will be placed on the CDN
 
-`/pages` - the main folder which contain all the pages `.js` & `.json` & `.wxss` & `.wxml`, which promises the whole application running normally
+`/pages` - the main folder which contain all the pages `.js` & `.json` & `.wxss` & `.wxml`, which promise the whole application running normally
 
 `/utils` - some tool will be saved here
 
