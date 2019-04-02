@@ -34,8 +34,8 @@ Page({
         var arr = wx.getStorageSync('cart') || [];
         if (arr.length > 0) {
             for (var i in arr) {
-                this.data.total += Number(arr[i].price) * Number(arr[i].count);
-                this.data.goodsCount += Number(arr[i].count);
+                this.data.total += Number(arr[i].price) * Number(arr[i].number);
+                this.data.goodsCount += Number(arr[i].number);
             }
             this.setData({
                 isCart: true,
@@ -160,10 +160,10 @@ Page({
     addCount(e) {
         const index = parseInt(e.currentTarget.dataset.index);
         let cart = this.data.cart;
-        let count = cart[index].count;
-        let goodsCount = cart.goodsCount;
+        let number = cart[index].number;
+        let goodsCount = cart.number;
         goodsCount = goodsCount + 1;
-        cart[index].count = count + 1;
+        cart[index].number = number + 1;
         this.setData({
             cart: cart
         });
@@ -176,13 +176,13 @@ Page({
     minusCount(e) {
         const index = parseInt(e.currentTarget.dataset.index);
         let cart = this.data.cart;
-        let count = cart[index].count;
+        let number = cart[index].number;
         let goodsCount = cart.goodsCount;
-        if (count <= 1) {
+        if (number <= 1) {
             return false;
         }
         goodsCount = goodsCount - 1;
-        cart[index].count = count - 1;
+        cart[index].number = number - 1;
         this.setData({
             cart: cart
         });
@@ -197,7 +197,7 @@ Page({
         let total = 0;
         for (let i = 0; i < cart.length; i++) {
             if (cart[i].selected) {
-                total += cart[i].count * cart[i].price;
+                total += cart[i].number * cart[i].price;
             }
         }
         this.setData({
@@ -212,7 +212,7 @@ Page({
     },
 
     /**
-     * 
+     * 前往支付页面
      */ 
     goToPay(){
         wx.navigateTo({

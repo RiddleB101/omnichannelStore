@@ -27,42 +27,42 @@ Page({
 
     /**
      * 加入购物车
-     * TODO: 数据无法传输到cart页面
      */
     addToCart: function () {
-        const {id, imgUrl, name, price} = this;
+        const id = this.data.id,
+            imgUrl = this.data.imgUrl,
+            name = this.data.name,
+            price = this.data.price;
         var cart = wx.getStorageSync('cart') || [];
         if (cart.length > 0) {
             for (var i in cart) {
-                if (cart[i].id == id){
-                    cart[i].count = cart[i].count + 1;
+                if (cart[i].id == id) {
+                    cart[i].number = cart[i].number + 1;
                     try {
                         wx.setStorageSync('cart', cart);
                     } catch (e) {
                         console.log(e);
                     }
                     return;
-                } 
+                }
             }
-            let newItem = {
+            cart.push({
                 id,
                 imgUrl,
                 name,
                 price,
-                count: 1,
+                number: 1,
                 selected: true
-            };
-            cart.push(newItem);
+            });
         } else {
-            let newItem = {
+            cart.push({
                 id,
                 imgUrl,
                 name,
                 price,
                 count: 1,
                 selected: true
-            };
-            cart.push(newItem);
+            });
         }
         try {
             wx.setStorageSync('cart', cart);

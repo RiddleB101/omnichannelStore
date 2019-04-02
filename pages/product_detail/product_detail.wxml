@@ -10,6 +10,6 @@
     </view>
     <view class="detailFooter" hover-class="none" hover-stop-propagation="false">
         <view class="price" hover-class="none" hover-stop-propagation="false">￥{{price}}</view>
-        <button class="addToCart" bindtap="{{addToCart}}">Add to Cart</button>
+        <button class="addToCart" bindtap="addToCart">Add to Cart</button>
     </view>
 </view>

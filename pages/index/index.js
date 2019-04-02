@@ -6,11 +6,26 @@ Page({
     // 初始化数据
     data: {
         navImgUrls: [
-            'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg',
-            'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg',
-            'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg',
-            'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg',
-            'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg'
+            {
+                id: 1,
+                url: 'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg'
+            },
+            {
+                id: 1,
+                url: 'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg'
+            },
+            {
+                id: 1,
+                url: 'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg'
+            },
+            {
+                id: 1,
+                url: 'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg'
+            },
+            {
+                id: 1,
+                url: 'http://img5.imgtn.bdimg.com/it/u=2906541843,1492984080&fm=23&gp=0.jpg'
+            }
         ],
         // 本地初始化数据, 后期提供服务器接口
         goodsList: [{
@@ -76,12 +91,12 @@ Page({
         for (var i in this.data.goodsList) {
             this.data.goodsList[i].selected = true;
             if (this.data.goodsList[i].id == e.target.id) {
-                this.data.goodsList[i].count = 1;
+                this.data.goodsList[i].number = 1;
                 var cart = wx.getStorageSync('cart') || [];
                 if (cart.length > 0) {
                     for (var j in cart) {
                         if (cart[j].id == e.target.id) {
-                            cart[j].count++;
+                            cart[j].number++;
                             try {
                                 wx.setStorageSync('cart', cart);
                             } catch (e) {
@@ -115,7 +130,7 @@ Page({
             // 暂时的解决方案, 将数据存放到localStorage中, 后期根据接口的情况再做修改
             url: '/pages/product_detail/product_detail?id=' + aimProduct.id + '&index=' + index + '&name=' + aimProduct.name + '&price=' + aimProduct.price,
             success: (result) => {
-                
+
             },
             fail: () => {},
             complete: () => {}
@@ -124,7 +139,7 @@ Page({
 
     onLoad: function () {
         var imgArr = [];
-        for(let i in this.data.goodsList) {
+        for (let i in this.data.goodsList) {
             imgArr.push(this.data.goodsList[i].imgUrl);
         }
         wx.setStorageSync('imgArr', imgArr);

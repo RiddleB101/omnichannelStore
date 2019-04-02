@@ -15,7 +15,7 @@
                     <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">
                         -
                     </text>
-                    <text class="cart-count-num">{{item.count}}</text>
+                    <text class="cart-count-num">{{item.number}}</text>
                     <text class="cart-count-add" bindtap="addCount" data-index="{{index}}">+</text>
                 </view>
                 <!-- 删除 -->

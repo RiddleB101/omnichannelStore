@@ -4,9 +4,10 @@ App({
         userInfo: null,
         version: "1.0",
         shopName: "OmniChannel Store",
+        // 跨域domain设定
         //sdomain: "#",
         //sdomain:"#",
-        //domain:"#"
+        //domain:"#" 
     },
 
     onLaunch: function () {
