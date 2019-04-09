@@ -1,9 +1,9 @@
 <view class="container">
     <view class="userinfo">
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="loginBtn">
+        <button wx:if="{{!hasUserInfo && canIUse && regFlag == false}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="loginBtn">
             Login
         </button>
-        <block wx:else>
+        <block wx:if="{{ regFlag == true }}">
             <image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
             <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
         </block>

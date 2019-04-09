@@ -2,7 +2,7 @@
  * 封装的基础get, post和put, upload等请求方法,
  * 设置请求体, 还有token和异常处理
  */
-const host = ''
+const host = '127.0.0.1:5000'
 
 /**
  * POST请求

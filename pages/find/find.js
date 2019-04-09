@@ -1,18 +1,23 @@
 // pages/find/find.js
+import { getRequest, postRequest } from '../../utils/apiConfig.js';
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
-
+        mapUrl: ''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        getRequest('map', 
+        function(){
 
+        }, function() {
+
+        })
     },
 
     /**
