@@ -1,42 +1,42 @@
 <!-- pages/cart/cart.wxml -->
 <view class="main">
-    <view wx:if="{{isCart}}">
-        <view class="cart-box">
-            <view class="cart-list" wx:for="{{cart}}" wx:key="{{index}}">
-                <icon wx:if="{{item.selected}}" type="success" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
-                <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
-                <navigator url="../details/details?id={{item.id}}">
-                    <image class="cart-thumb" src="{{item.imgUrl}}"></image>
-                </navigator>
-                <text class="cart-pro-name">{{item.name}}</text>
-                <text class="cart-pro-price">￥{{item.price}}</text>
-                <!-- 数量框 -->
-                <view class="cart-count-box">
-                    <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">
+  <view wx:if="{{list.length}}">
+    <view class="cart-box">
+      <view class="cart-list" wx:for="{{list}}" wx:key="{{index}}">
+        <icon wx:if="{{item.active}}" type="success" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
+        <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
+        <navigator url="../details/details?id={{item.id}}">
+          <image class="cart-thumb" src="{{item.pic_url}}"></image>
+        </navigator>
+        <text class="cart-pro-name">{{item.name}}</text>
+        <text class="cart-pro-price">￥{{item.price}}</text>
+        <!-- 数量框 -->
+        <view class="cart-count-box">
+          <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">
                         -
                     </text>
-                    <text class="cart-count-num">{{item.number}}</text>
-                    <text class="cart-count-add" bindtap="addCount" data-index="{{index}}">+</text>
-                </view>
-                <!-- 删除 -->
-                <text class="cart-del" bindtap="deleteList" data-index="{{index}}">×</text>
-            </view>
+          <text class="cart-count-num">{{item.number}}</text>
+          <text class="cart-count-add" bindtap="addCount" data-index="{{index}}">+</text>
         </view>
-        <!-- 最下方全选框以及结算 -->
-        <view class="cart-footer">
-            <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll" />
-            <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" />
-            <view class="order-icon">
-                <navigator url="../orders/orders">
-                    <image src="/image/icon3.png"></image>
-                </navigator>
-            </view>
-            <text>全选</text>
-            <text class="cart-total-price">￥{{total}}</text>
-            <button class="total_pay" size="mini" bindtap="goToPay">Go to pay</button>
-        </view>
+        <!-- 删除 -->
+        <text class="cart-del" bindtap="deleteList" data-index="{{index}}">×</text>
+      </view>
     </view>
-    <view wx:else>
-        <view class="cart-no-data">Cart is Empty~</view>
+    <!-- 最下方全选框以及结算 -->
+    <view class="cart-footer">
+      <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="allSelect" />
+      <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" />
+      <view class="order-icon">
+        <navigator url="../orders/orders">
+          <image src="/image/icon3.png"></image>
+        </navigator>
+      </view>
+      <text>全选</text>
+      <text class="cart-total-price">￥{{totalPrice}}</text>
+      <button class="total_pay" size="mini" bindtap="toPayOrder">Go to pay</button>
     </view>
+  </view>
+  <view wx:else>
+    <view class="cart-no-data">Cart is Empty~</view>
+  </view>
 </view>

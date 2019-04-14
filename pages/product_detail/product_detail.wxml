@@ -1,15 +1,47 @@
 <!-- pages/product_detail/product_detail.wxml -->
 <view class="container">
-    <view class="productImg">
-        <image class="productDetails" src="{{imgUrl}}" binderror="" bindload=""></image>
+  <view class="productImg">
+    <image class="productDetails" src="{{ imgUrl }}" binderror="" bindload=""></image>
+  </view>
+  <view class="productInfo" hover-class="none" hover-stop-propagation="false">
+    <view class="productText" hover-class="none" hover-stop-propagation="false">
+      <text class="introduction" selectable="false" space="false" decode="false">{{ summary }}</text>
     </view>
-    <view class="productInfo" hover-class="none" hover-stop-propagation="false">
-        <view class="productText" hover-class="none" hover-stop-propagation="false">
-            <text class="introduction" selectable="false" space="false" decode="false"></text>
+  </view>
+  <!--底部-->
+  <view class="footer-box">
+    <view class="shop-cart-btn" bindtap="goShopCar">
+      <view class="shop-num">({{shopCarNum}})</view>
+      <view style='position:absolute;bottom:10rpx;'>Cart</view>
+    </view>
+    <view class="join-shop-cart" bindtap="toAddShopCar">加入购物车</view>
+  </view>
+
+  <!--购买和收藏弹窗-->
+  <view class="show-popup" hidden="{{hideShopPopup}}">
+    <view class="popup-mask" bindtap="closePopupTap"></view>
+    <view class="popup-contents">
+      <view class="pop-goods-info">
+        <view class="pop-goods-des">
+          <view class="pop-goods-title">{{name}}</view>
+          <view class="pop-goods-price">¥ {{price}}</view>
         </view>
+        <view class="pop-goods-close" bindtap="closePopupTap"></view>
+      </view>
+
+      <view class="buy-num-box">
+        <view class="num-label">购买数量</view>
+        <view class="num-box">
+          <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numMinusTap">-</view>
+          <view class="num-input">
+            <input type="number" value="{{buyNumber}}" disabled/>
+          </view>
+          <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numPlusTap">+</view>
+        </view>
+      </view>
+      <view class="popup-join-btn" bindtap="addShopCar">
+        加入购物车
+      </view>
     </view>
-    <view class="detailFooter" hover-class="none" hover-stop-propagation="false">
-        <view class="price" hover-class="none" hover-stop-propagation="false">￥{{price}}</view>
-        <button class="addToCart" bindtap="addToCart">Add to Cart</button>
-    </view>
+  </view>
 </view>

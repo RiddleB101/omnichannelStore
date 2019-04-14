@@ -17,6 +17,12 @@ Page({
 
     },
 
+    goToIndex: function() {
+        wx.switchTab({
+            url: '/pages/index/index',
+        })
+    },
+
     /**
      * 获取用户信息
      */
@@ -47,20 +53,35 @@ Page({
                     url: app.buildUrl('/member/login'),
                     header: app.getRequestHeader(),
                     method: 'POST',
-                    data: {code: res.code},
+                    data: data,
                     success: function(res) {
-                        
+                        if (res.data.code != 200) {
+                            app.alert({
+                                'content': res.data.msg
+                            })
+                            that.setData({
+                                regFlag: false
+                            })
+                            return;
+                        }
+                        app.setCache("token", res.data.data.token)
+                        that.setData({
+                            userInfo: e.detail.userInfo,
+                            hasUserInfo: true,
+                            regFlag: true
+                        })
+
                     }
                 })
-                that.setData({
-                    userInfo: e.detail.userInfo,
-                    hasUserInfo: true,
-                })
+
             }
-        })   
+        })
     },
-    checkLogin: function() {
+
+
+    checkLogin: function(e) {
         var that = this;
+        var data = e.detail.userInfo
         wx.login({
             success: function(res) {
                 if (!res.code) {
@@ -74,13 +95,18 @@ Page({
                     url: app.buildUrl('/member/check-reg'),
                     header: app.getRequestHeader(),
                     method: 'POST',
-                    data: {code: res.code},
-                    success: function (res) {
-                        if (res.code != 200) {
+                    data: data,
+                    success: function(res) {
+                        if (res.data.code != 200) {
+                            app.alert({
+                                'content': res.data.msg
+                            })
                             that.setData({
                                 regFlag: false
                             })
+                            return;
                         }
+                        app.setCache("token", res.data.data.token)
                     }
                 })
             }

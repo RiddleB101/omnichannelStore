@@ -1,1 +1,13 @@
 /* pages/find/find.wxss */
+
+.container {
+  display: flex;
+  height: auto;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.findBtn {
+  width: 50%;
+}

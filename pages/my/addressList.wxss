@@ -22,7 +22,6 @@
     padding-left: 58rpx;
 }
 .a-address .left-text.active{
-    background: url() no-repeat left center;/*logo*/
     background-size: 28rpx auto;
 }
 .a-address .left-text .name-tel{
@@ -38,7 +37,6 @@
     height: 100%;
     padding: 50rpx 0 50rpx 58rpx;
     box-sizing: border-box;
-    background: url() no-repeat 43rpx center; /*logo*/
     background-size: 35rpx auto;
 }
 .bottom-box{
@@ -50,12 +48,10 @@
     border-top: 1rpx solid #eee;
     height:100rpx;
     line-height: 100rpx;
-    background: #fff url() no-repeat 705rpx center; /*logo*/
     background-size: 15rpx auto;
 }
 .bottom-box .add-btn{
     margin-left: 30rpx;
     padding-left: 70rpx;
-    background: url() no-repeat left center; /*logo*/
     background-size: 40rpx auto;
 }
