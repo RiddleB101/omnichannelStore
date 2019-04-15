@@ -1,7 +1,6 @@
 //app.js
 App({
   globalData: {
-    userInfo: {},
     version: "1.0",
     shopName: "OmniChannel Store",
     isLogin: false,

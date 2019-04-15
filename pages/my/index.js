@@ -14,10 +14,10 @@ Page({
   },
 
   onShow() {
-
+    this.loginStatus()
   },
 
-  goToIndex: function () {
+  goToIndex: function() {
     wx.switchTab({
       url: '/pages/index/index',
     })
@@ -26,7 +26,7 @@ Page({
   /**
    * 获取用户信息
    */
-  getUserInfo: function (e) {
+  getUserInfo: function(e) {
     var that = this
     app.console(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -41,7 +41,7 @@ Page({
 
     var data = e.detail.userInfo
     wx.login({
-      success: function (res) {
+      success: function(res) {
         if (!res.code) {
           app.alert({
             "content": "授权失败"
@@ -54,7 +54,7 @@ Page({
           header: app.getRequestHeader(),
           method: 'POST',
           data: data,
-          success: function (res) {
+          success: function(res) {
             if (res.data.code != 200) {
               app.alert({
                 'content': res.data.msg
@@ -79,10 +79,10 @@ Page({
   },
 
 
-  checkLogin: function () {
+  checkLogin: function() {
     var that = this;
     wx.login({
-      success: function (res) {
+      success: function(res) {
         if (!res.code) {
           app.alert({
             "content": "授权失败"
@@ -93,12 +93,11 @@ Page({
           url: app.buildUrl('/member/check-reg'),
           header: app.getRequestHeader(),
           method: 'POST',
-          data: { code: res.code },
-          success: function (res) {
+          data: {
+            code: res.code
+          },
+          success: function(res) {
             if (res.data.code != 200) {
-              app.alert({
-                'content': res.data.msg
-              })
               that.setData({
                 regFlag: false
               })
@@ -109,5 +108,14 @@ Page({
         })
       }
     })
+  },
+
+  loginStatus: function() {
+    var that = this
+    if (app.globalData.userInfo) {
+      that.setData({
+        userInfo: app.globalData.userInfo
+      })
+    }
   }
 });
