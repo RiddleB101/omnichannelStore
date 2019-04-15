@@ -1,14 +1,15 @@
 {
   "pages": [
-    "pages/cart/cart",
     "pages/index/index",
+    "pages/my/order_list",
+
     "pages/logs/logs",
     "pages/find/find",
+    "pages/cart/cart",
     "pages/my/profile",
     "pages/my/index",
     "pages/my/addressList",
     "pages/my/addressSet",
-    "pages/my/order_list",
     "pages/my/order_info",
     "pages/my/commentList",
     "pages/order/index",

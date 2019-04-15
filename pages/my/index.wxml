@@ -1,30 +1,24 @@
 <view class="container">
-    <view class="userinfo">
-        <button wx:if="{{regFlag == false}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="loginBtn">
-            Login
-        </button>
-        <block wx:if="{{ regFlag == true }}">
-            <image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-            <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
-        </block>
-    </view>
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
-    <view class="my-item">
-        <navigator url="/pages/my/order_list" hover-class="navigator-hover">Orders</navigator>
-    </view>
-    <view class="my-item">
-        <navigator url="/pages/my/addressList" hover-class="navigator-hover">Address</navigator>
-    </view>
-    <view class="my-item">
-        <navigator url="/pages/my/commentList" hover-class="navigator-hover">Comments</navigator>
-    </view>
-    <view class="my-item">
-        <navigator url="/pages/index/index" hover-class="navigator-hover">Recommendation</navigator>
-    </view>
-    <view class="my-item">
-        <navigator url="/pages/settings/settings" hover-class="navigator-hover">Settings</navigator>
-    </view>
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
-    <view class="version">Powered by HKU</view>
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
+  <view class="userinfo">
+    <button wx:if="{{regFlag == false}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="loginBtn">
+      Login
+    </button>
+    <block wx:if="{{ regFlag == true }}">
+      <image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{userInfo.avatarUrl || avatar}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
+    </block>
+  </view>
+  <view style="height:20rpx;background: #eee;width:100%;"></view>
+  <view class="my-item">
+    <navigator url="/pages/my/order_list" hover-class="navigator-hover">Orders</navigator>
+  </view>
+  <view class="my-item">
+    <navigator url="/pages/index/index" hover-class="navigator-hover">Recommendation</navigator>
+  </view>
+  <view class="my-item">
+    <navigator url="/pages/settings/settings" hover-class="navigator-hover">Settings</navigator>
+  </view>
+  <view style="height:20rpx;background: #eee;width:100%;"></view>
+  <view class="version">Powered by HKU</view>
+  <view style="height:20rpx;background: #eee;width:100%;"></view>
 </view>
