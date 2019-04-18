@@ -2,10 +2,10 @@ var app = getApp();
 Page({
   data: {
     order_list: [],
-    statusType: ["待付款", "待发货", "待确认", "待评价", "已完成", "已关闭"],
-    status: ["-8", "-7", "-6", "-5", "1", "0"],
+    statusType: ["待付款", "待评价", "已完成"],
+    status: ["-8", "-5", "1"],
     currentType: 0,
-    tabClass: ["", "", "", "", "", ""]
+    tabClass: ["", "", ""]
   },
   statusTap: function(e) {
     var curType = e.currentTarget.dataset.index;
@@ -58,7 +58,7 @@ Page({
       header: app.getRequestHeader(),
       method: 'POST',
       data: {
-        order_sn: e.currentTarget.dataset.index
+        order_sn: e.currentTarget.dataset.sn,
       },
       success: function(res) {
         var resp = res.data;
@@ -68,27 +68,16 @@ Page({
           });
           return;
         }
-        var pay_info = resp.data.pay_info;
-        wx.requestPayment({
-          'timeStamp': pay_info.timeStamp,
-          'nonceStr': pay_info.nonceStr,
-          'package': pay_info.package,
-          'signType': 'MD5',
-          'paySign': pay_info.paySign,
-          'success': function(res) {},
-          'fail': function(res) {}
+        app.alert({
+          "content": resp.msg
         });
       }
     });
   },
   orderConfirm: function(e) {
-    this.orderOps(e.currentTarget.dataset.id, "confirm", "确定收到？");
+    this.orderOps(e.currentTarget.dataset.id, "confirm", "Have paid ？");
   },
-  orderComment: function(e) {
-    wx.navigateTo({
-      url: "/pages/my/comment?order_sn=" + e.currentTarget.dataset.id
-    });
-  },
+
   orderOps: function(order_sn, act, msg) {
     var that = this;
     var params = {

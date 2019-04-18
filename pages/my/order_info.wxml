@@ -10,7 +10,7 @@
       </view>
       <view class="right-text">
         <view class="status red">{{info.status_desc}}</view>
-        <view class="des">请于{{ info.deadline }}前付款，超时订单将自动关闭</view>
+        <view class="des">Please pay before {{ info.deadline }}. If time run out, the order will close!</view>
       </view>
     </view>
     <block>
@@ -18,17 +18,11 @@
         <view class="icon-box">
           <image class="icon" src="/images/order/icon-address.png"></image>
         </view>
-        <view class="right-box">
-          <view class="name-tel">{{info.address.name}} {{info.address.mobile}}</view>
-          <view class="text">
-            {{info.address.address}}
-          </view>
-        </view>
       </view>
     </block>
   </view>
   <view class="goods-list">
-    <view class="list-title">商品信息</view>
+    <view class="list-title">Commodity Info</view>
     <block wx:for-items="{{info.goods}}" wx:key="{{index}}">
       <view class="a-goods">
         <view class="img-box">
@@ -47,20 +41,16 @@
       </view>
     </block>
     <view class="btn-row">
-      <button class="confirm-btn" data-id="{{info.order_sn}}">确认收货</button>
+      <button class="confirm-btn" data-id="{{info.order_sn}}" bindtap='confirmPay'>Pay</button>
     </view>
   </view>
   <view class="goods-info">
     <view class="row-box">
-      <view class="row-label">商品金额</view>
+      <view class="row-label">Price</view>
       <view class="right-text">¥ {{info.pay_price}}</view>
     </view>
     <view class="row-box">
-      <view class="row-label">运费</view>
-      <view class="right-text">+ ¥ {{info.yun_price}}</view>
-    </view>
-    <view class="row-box">
-      <view class="row-label">应付总额</view>
+      <view class="row-label">Total Price</view>
       <view class="right-text">¥ {{info.total_price}}</view>
     </view>
   </view>

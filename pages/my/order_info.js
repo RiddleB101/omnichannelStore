@@ -30,5 +30,26 @@ Page({
         });
       }
     });
+  },
+  confrimPay: function(e) {
+    var that = this;
+    wx.request({
+      url: app.buildUrl("/my/order/check-pay"),
+      header: app.getRequestHeader(),
+      data: {
+        order_sn: that.data.order_sn
+      },
+      success: function (res) {
+        var resp = res.data;
+        if (resp.code != 200) {
+          app.alert({ "content": resp.msg });
+          return;
+        }
+        app.alert({"content": resp.msg})
+        wx.navigateTo({
+          url: '/pages/my/index',
+        })
+      }
+    })
   }
 });

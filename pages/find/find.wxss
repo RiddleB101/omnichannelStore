@@ -1,4 +1,5 @@
 /* pages/find/find.wxss */
+@import '../../app.wxss';
 
 .container {
   display: flex;
@@ -8,6 +9,15 @@
   align-items: center;
 }
 
-.findBtn {
-  width: 50%;
+button::after{ 
+	border: none; 
+}
+
+button {
+    margin-top: 480rpx;
+    width: 200px;
+    border-radius: 30px;
+    background: #673bb7;
+    color: white;
+    padding: 0rpx 100rpx;
 }
