@@ -1,4 +1,5 @@
 {
     "usingComponents": {},
-    "navigationBarTitleText": "Find"
+    "navigationBarTitleText": "Find",
+    "enablePullDownRefresh": true
 }

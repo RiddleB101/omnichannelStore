@@ -19,6 +19,6 @@
     <navigator url="/pages/settings/settings" hover-class="navigator-hover">Settings</navigator>
   </view>
   <view style="height:20rpx;background: #eee;width:100%;"></view>
-  <view class="version">Powered by HKU</view>
+  <view class="version">Powered by XXX</view>
   <view style="height:20rpx;background: #eee;width:100%;"></view>
 </view>

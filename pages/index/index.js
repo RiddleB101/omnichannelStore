@@ -26,6 +26,14 @@ Page({
         });
     },
 
+    onPullDownRefresh:function(){
+      wx.showNavigationBarLoading()
+      this.getBannerAndCat()
+      this.getProductList()
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh()
+    },
+
     //解决切换不刷新banner，每次展示都会调用这个方法
     onShow: function() {
         this.getBannerAndCat();
@@ -76,6 +84,7 @@ Page({
     },
 
     getBannerAndCat: function() {
+        
         var that = this;
         wx.request({
             url: app.buildUrl("/product/index"),
@@ -96,6 +105,7 @@ Page({
                 that.getProductList();
             }
         });
+        
     },
 
     catClick: function(e) {

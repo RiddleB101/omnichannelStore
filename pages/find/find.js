@@ -17,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.startConnect()
+    this.getBluetooth()
   },
 
   /**
@@ -42,241 +42,77 @@ Page({
   },
 
   /**
-   * 用户点击按钮以后开始获取iBeacon接口
+   * 用户点击按钮以后开始获取iBeacon的回调函数
    * 通过iBeacon获取数据
    * 然后发送到后端
    */
   getBeacon: function() {
+    wx.showNavigationBarLoading()
     wx.openBluetoothAdapter({
       success: function(res) {
-        app.console(res.errCode)
+        wx.startBeaconDiscovery({
+          //多个uuid数组
+          uuids: ["FDA50693-A4E2-4FB1-AFCF-C6EB07647825"],
+          success: function(res) {
+            wx.onBeaconUpdate(function() {
+              //设置监听事件
+              wx.getBeacons({
+                //在监听事件中获取数据
+                success: res => {
+                  //res.beacons 为搜索到的iBeacon数据数组
+                  console.log(res.beacons)
+                  wx.request({
+                    url: app.buildUrl("/product/index"),
+                    header: app.getRequestHeader(),
+                    success: function (res) {
+                      
+                    }
+                  });
+                }
+              })
+            })
+          }
+        })
       },
-      fail: function() {
-        app.console(errCode)
+      fail: () => {
+        wx.showModal({
+          title: 'Alert',
+          content: '请先打开您的手机蓝牙，打开后下拉刷新',
+        })
       }
     })
   },
 
-  startConnect: function() {
-    var that = this;
-    wx.showLoading({
-      title: '开启蓝牙适配'
-    });
+  /**
+   * 页面加载时判断蓝牙是否开启
+   */
+  getBluetooth: function() {
+    wx.showNavigationBarLoading()
     wx.openBluetoothAdapter({
-      success: function(res) {
-        console.log("初始化蓝牙适配器");
-        console.log(res);
-        that.getBluetoothAdapterState();
-      },
-      fail: function(err) {
-        console.log(err);
+      success: () => {
+        console.log("success")
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
         wx.showToast({
-          title: '蓝牙初始化失败',
-          icon: 'success',
-          duration: 2000
-        })
+          title: '蓝牙已开启'
+        });
         setTimeout(function() {
           wx.hideToast()
-        }, 2000)
-      }
-    });
-    wx.onBluetoothAdapterStateChange(function(res) {
-      var available = res.available;
-      if (available) {
-        that.getBluetoothAdapterState();
+        }, 1000)
+      },
+      fail: () => {
+        wx.showModal({
+          title: 'Alert',
+          content: '请先打开您的手机蓝牙，打开后下拉刷新',
+        })
       }
     })
-  },
-
-  getBluetoothAdapterState: function() {
-    var that = this;
-    wx.getBluetoothAdapterState({
-      success: function(res) {
-        var available = res.available,
-          discovering = res.discovering;
-        if (!available) {
-          wx.showToast({
-            title: '设备无法开启蓝牙连接',
-            icon: 'success',
-            duration: 2000
-          })
-          setTimeout(function() {
-            wx.hideToast()
-          }, 2000)
-        } else {
-          if (!discovering) {
-            that.startBluetoothDevicesDiscovery();
-            that.getConnectedBluetoothDevices();
-          }
-        }
-      }
-    })
-  },
-
-  startBluetoothDevicesDiscovery: function() {
-    var that = this;
-    wx.showLoading({
-      title: '蓝牙搜索'
-    });
-    wx.startBluetoothDevicesDiscovery({
-      services: [],
-      allowDuplicatesKey: false,
-      success: function(res) {
-        if (!res.isDiscovering) {
-          that.getBluetoothAdapterState();
-        } else {
-          that.onBluetoothDeviceFound();
-        }
-      },
-      fail: function(err) {
-        console.log(err);
-      }
-    });
-  },
-
-  getConnectedBluetoothDevices: function() {
-    var that = this;
-    wx.getConnectedBluetoothDevices({
-      services: [that.serviceId],
-      success: function(res) {
-        console.log("获取处于连接状态的设备", res);
-        var devices = res['devices'],
-          flag = false,
-          index = 0,
-          conDevList = [];
-        devices.forEach(function(value, index, array) {
-          if (value['name'].indexOf('FeiZhi') != -1) {
-            // 如果存在包含 FeiZhi 字段的设备
-            flag = true;
-            index += 1;
-            conDevList.push(value['deviceId']);
-            that.deviceId = value['deviceId'];
-            return;
-          }
-        });
-        if (flag) {
-          this.connectDeviceIndex = 0;
-          that.loopConnect(conDevList);
-        } else {
-          if (!this.getConnectedTimer) {
-            that.getConnectedTimer = setTimeout(function() {
-              that.getConnectedBluetoothDevices();
-            }, 5000);
-          }
-        }
-      },
-      fail: function(err) {
-        if (!this.getConnectedTimer) {
-          that.getConnectedTimer = setTimeout(function() {
-            that.getConnectedBluetoothDevices();
-          }, 5000);
-        }
-      }
-    });
-  },
-  onBluetoothDeviceFound: function() {
-    var that = this;
-    console.log('onBluetoothDeviceFound');
-    wx.onBluetoothDeviceFound(function(res) {
-      console.log('new device list has founded')
-      console.log(res);
-      if (res.devices[0]) {
-        var name = res.devices[0]['name'];
-        if (name != '') {
-          if (name.indexOf('FeiZhi') != -1) {
-            var deviceId = res.devices[0]['deviceId'];
-            that.deviceId = deviceId;
-            console.log(that.deviceId);
-            that.startConnectDevices();
-          }
-        }
-      }
-    })
-  },
-  startConnectDevices: function(ltype, array) {
-    var that = this;
-    clearTimeout(that.getConnectedTimer);
-    that.getConnectedTimer = null;
-    clearTimeout(that.discoveryDevicesTimer);
-    that.stopBluetoothDevicesDiscovery();
-    this.isConnectting = true;
-    wx.createBLEConnection({
-      deviceId: that.deviceId,
-      success: function(res) {
-        if (res.errCode == 0) {
-          setTimeout(function() {
-            that.getService(that.deviceId);
-          }, 5000)
-        }
-      },
-      fail: function(err) {
-        console.log('连接失败：', err);
-        if (ltype == 'loop') {
-          that.connectDeviceIndex += 1;
-          that.loopConnect(array);
-        } else {
-          that.startBluetoothDevicesDiscovery();
-          that.getConnectedBluetoothDevices();
-        }
-      },
-      complete: function() {
-        console.log('complete connect devices');
-        this.isConnectting = false;
-      }
-    });
-  },
-  getService: function(deviceId) {
-    var that = this;
-    // 监听蓝牙连接
-    wx.onBLEConnectionStateChange(function(res) {
-      console.log(res);
-    });
-    // 获取蓝牙设备 service 值
-    wx.getBLEDeviceServices({
-      deviceId: deviceId,
-      success: function(res) {
-        that.getCharacter(deviceId, res.services);
-      }
-    })
-  },
-
-  getCharacter: function(deviceId, services) {
-    var that = this;
-    services.forEach(function(value, index, array) {
-      if (value == that.serviceId) {
-        that.serviceId = array[index];
-      }
-    });
-    wx.getBLEDeviceCharacteristics({
-      deviceId: deviceId,
-      serviceId: that.serviceId,
-      success: function(res) {
-        that.writeBLECharacteristicValue(deviceId, that.serviceId, that.characterId_write);
-        that.openNotifyService(deviceId, that.serviceId, that.characterId_read);
-      },
-      fail: function(err) {
-        console.log(err);
-      },
-      complete: function() {
-        console.log('complete');
-      }
+    wx.closeBluetoothAdapter({
+      success: function(res) {},
     })
   },
 
 
-  loopConnect: function (devicesId) {
-    var that = this;
-    var listLen = devicesId.length;
-    if (devicesId[this.connectDeviceIndex]) {
-      this.deviceId = devicesId[this.connectDeviceIndex];
-      this.startConnectDevices('loop', devicesId);
-    }
-    else {
-      console.log('已配对的设备小程序蓝牙连接失败');
-      that.startBluetoothDevicesDiscovery();
-      that.getConnectedBluetoothDevices();
-    }
-  },
 
   /**
    * 生命周期函数--监听页面卸载
@@ -289,7 +125,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.getBluetooth()
   },
 
   /**
