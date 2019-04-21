@@ -4,7 +4,7 @@
       Login
     </button>
     <block wx:if="{{ regFlag == true }}">
-      <image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{userInfo.avatarUrl || avatar}}" background-size="cover"></image>
+      <image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
     </block>
   </view>

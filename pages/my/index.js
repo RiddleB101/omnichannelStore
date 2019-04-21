@@ -14,7 +14,7 @@ Page({
   },
 
   onShow() {
-    this.loginStatus()
+    
   },
 
   goToIndex: function() {
@@ -90,7 +90,7 @@ Page({
           return;
         }
         wx.request({
-          url: app.buildUrl('/member/check-reg'),
+          url: app.buildUrl('/member/check-login'),
           header: app.getRequestHeader(),
           method: 'POST',
           data: {
@@ -103,19 +103,18 @@ Page({
               })
               return;
             }
+
+            that.setData({
+              userInfo: {
+                avatarUrl: res.data.data.avatar,
+                nickName: res.data.data.nickname
+              },
+              regFlag: true
+            })
             app.setCache("token", res.data.data.token)
           }
         })
       }
     })
-  },
-
-  loginStatus: function() {
-    var that = this
-    if (app.globalData.userInfo) {
-      that.setData({
-        userInfo: app.globalData.userInfo
-      })
-    }
   }
 });

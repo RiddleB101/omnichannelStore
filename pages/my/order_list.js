@@ -2,11 +2,15 @@ var app = getApp();
 Page({
   data: {
     order_list: [],
-    statusType: ["待付款", "待评价", "已完成"],
-    status: ["-8", "-5", "1"],
+    statusType: ["待付款", "待确认", "待评价", "已完成", "已关闭"],
+    status: ["-8", "-6", "-5", "1", "0"],
     currentType: 0,
-    tabClass: ["", "", ""]
+    tabClass: ["", "", "", "", ""]
   },
+
+  /**
+   * 切换tabs
+   */
   statusTap: function(e) {
     var curType = e.currentTarget.dataset.index;
     this.setData({
@@ -14,20 +18,33 @@ Page({
     });
     this.getPayOrder();
   },
+
+  /**
+   * 前往详情页
+   */
   orderDetail: function(e) {
     wx.navigateTo({
       url: "/pages/my/order_info?order_sn=" + e.currentTarget.dataset.id
     })
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function(options) {
-    // 生命周期函数--监听页面加载
+
   },
+
+  /**
+   * 
+   */
   onShow: function() {
     this.getPayOrder();
   },
-  orderCancel: function(e) {
-    this.orderOps(e.currentTarget.dataset.id, "cancel", "确定取消订单？");
-  },
+
+  /**
+   * 获取订单详情
+   */
   getPayOrder: function() {
     var that = this;
     wx.request({
@@ -44,13 +61,16 @@ Page({
           });
           return;
         }
-
         that.setData({
           order_list: resp.data.pay_order_list
         });
       }
     });
   },
+
+  /**
+   * 前往支付页面
+   */
   toPay: function(e) {
     var that = this;
     wx.request({
@@ -74,10 +94,24 @@ Page({
       }
     });
   },
-  orderConfirm: function(e) {
-    this.orderOps(e.currentTarget.dataset.id, "confirm", "Have paid ？");
+
+  /**
+   * 订单取消按钮
+   */
+  orderCancel: function(e) {
+    this.orderOps(e.currentTarget.dataset.id, "cancel", "Cancel order？");
   },
 
+  /**
+   * 订单确认按钮
+   */
+  orderConfirm: function(e) {
+    this.orderOps(e.currentTarget.dataset.id, "confirm", "Confirm Order？");
+  },
+
+  /**
+   * 判断点击哪个按钮, 对应操作
+   */
   orderOps: function(order_sn, act, msg) {
     var that = this;
     var params = {
