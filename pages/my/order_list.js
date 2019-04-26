@@ -2,10 +2,10 @@ var app = getApp();
 Page({
   data: {
     order_list: [],
-    statusType: ["待付款", "待确认", "待评价", "已完成", "已关闭"],
-    status: ["-8", "-6", "-5", "1", "0"],
+    statusType: ["待付款", "待评价", "已完成", "已关闭"],
+    status: ["-8", "-5", "1", "0"],
     currentType: 0,
-    tabClass: ["", "", "", "", ""]
+    tabClass: ["", "", "", ""]
   },
 
   /**
@@ -138,5 +138,11 @@ Page({
       }
     };
     app.tip(params);
+  },
+
+  orderComment: function(e) {
+    wx.navigateTo({
+      url: "/pages/my/comment?order_sn=" + e.currentTarget.dataset.id
+    });
   }
 });

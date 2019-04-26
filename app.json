@@ -2,15 +2,13 @@
   "pages": [
     "pages/index/index",
     "pages/my/order_list",
-
     "pages/logs/logs",
     "pages/find/find",
     "pages/cart/cart",
     "pages/my/profile",
     "pages/my/index",
-    "pages/my/addressList",
-    "pages/my/addressSet",
     "pages/my/order_info",
+    "pages/my/comment",
     "pages/my/commentList",
     "pages/order/index",
     "pages/product_detail/product_detail",

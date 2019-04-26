@@ -16,7 +16,7 @@
     <navigator url="/pages/index/index" hover-class="navigator-hover">Recommendation</navigator>
   </view>
   <view class="my-item">
-    <navigator url="/pages/settings/settings" hover-class="navigator-hover">Settings</navigator>
+    <navigator url="/pages/my/commentList" hover-class="navigator-hover">Comments</navigator>
   </view>
   <view style="height:20rpx;background: #eee;width:100%;"></view>
   <view class="version">Powered by XXX</view>

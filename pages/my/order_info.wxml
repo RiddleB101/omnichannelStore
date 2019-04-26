@@ -40,7 +40,7 @@
         </view>
       </view>
     </block>
-    <view class="btn-row">
+    <view class="btn-row" wx:if="{{info.status == -5}}">
       <button class="confirm-btn" data-id="{{info.order_sn}}" bindtap='confirmPay'>Pay</button>
     </view>
   </view>
