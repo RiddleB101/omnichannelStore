@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    beacon_info: []
   },
 
   /**
@@ -47,9 +47,31 @@ Page({
    * 然后发送到后端
    */
   getBeacon: function() {
+    var that = this
+    var beacon_info = []
     wx.showNavigationBarLoading()
     wx.openBluetoothAdapter({
       success: function(res) {
+        setTimeout(() => {
+          wx.stopBeaconDiscovery()
+          wx.showToast({
+            title: 'return'
+          });
+          wx.request({
+            url: app.buildUrl("/find/beacon"),
+            header: app.getRequestHeader(),
+            data: {
+              beacon_info: app.getCache(beacon_info)
+            },
+            success: function (res) {
+              console.log(res.data)
+            }
+          });
+          setTimeout(function () {
+            wx.hideToast()
+          }, 1000)
+          wx.hideNavigationBarLoading()
+        }, 8000)
         wx.startBeaconDiscovery({
           //多个uuid数组
           uuids: ["FDA50693-A4E2-4FB1-AFCF-C6EB07647825"],
@@ -58,18 +80,22 @@ Page({
               //设置监听事件
               wx.getBeacons({
                 //在监听事件中获取数据
-                success: res => {
+                success: function(res) {
                   //res.beacons 为搜索到的iBeacon数据数组
                   console.log(res.beacons)
-                  wx.request({
-                    url: app.buildUrl("/product/index"),
-                    header: app.getRequestHeader(),
-                    success: function (res) {
-                      
-                    }
-                  });
+                  beacon_info = app.getCache(beacon_info) || []
+                  beacon_info.push(JSON.stringify({
+                    uuid: res.beacons.uuid,
+                    accuracy: res.beacons.accuracy,
+                    major: res.beacons.major,
+                    minor: res.beacons.proximity,
+                    proximity: res.beacons.proximity,
+                    rssi: res.beacons.rssi
+                  }));
+                  app.setCache('beacon_info', beacon_info)
                 }
               })
+              wx.hideNavigationBarLoading()
             })
           }
         })
@@ -80,6 +106,7 @@ Page({
           content: '请先打开您的手机蓝牙，打开后下拉刷新',
         })
       }
+      
     })
   },
 
