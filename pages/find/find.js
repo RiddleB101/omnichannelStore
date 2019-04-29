@@ -48,7 +48,6 @@ Page({
    */
   getBeacon: function() {
     var that = this
-    var beacon_info = []
     wx.showNavigationBarLoading()
     wx.openBluetoothAdapter({
       success: function(res) {
@@ -57,11 +56,12 @@ Page({
           wx.showToast({
             title: 'return'
           });
+          
           wx.request({
             url: app.buildUrl("/find/beacon"),
             header: app.getRequestHeader(),
             data: {
-              beacon_info: app.getCache(beacon_info)
+              beacon_info: app.getCache('beacon_info')
             },
             success: function (res) {
               console.log(res.data)
@@ -83,15 +83,8 @@ Page({
                 success: function(res) {
                   //res.beacons 为搜索到的iBeacon数据数组
                   console.log(res.beacons)
-                  beacon_info = app.getCache(beacon_info) || []
-                  beacon_info.push(JSON.stringify({
-                    uuid: res.beacons.uuid,
-                    accuracy: res.beacons.accuracy,
-                    major: res.beacons.major,
-                    minor: res.beacons.proximity,
-                    proximity: res.beacons.proximity,
-                    rssi: res.beacons.rssi
-                  }));
+                  var beacon_info = app.getCache('beacon_info') || []
+                  beacon_info.push(JSON.stringify(res.beacons));
                   app.setCache('beacon_info', beacon_info)
                 }
               })
